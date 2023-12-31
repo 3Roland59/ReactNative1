@@ -1,23 +1,23 @@
 import React from "react"
 import { Feather } from '@expo/vector-icons'
 import { View, ImageBackground, Text, SafeAreaView, StyleSheet, StatusBar } from "react-native"
+import RowTxt from "../components/RowTxt"
 
 const CurrentWeather = () =>{
+
+  const { wrapper, container, contain, image, hlWrapper, hl, bodyWrapper, des, mes, temp, feels } = styles
+
   return(
-    <SafeAreaView style={styles.wrapper}>
-      <ImageBackground source={require('../../assets/clouds1.jpg')} style={styles.image}>
-      <View style={styles.container}>
+    <SafeAreaView style={wrapper}>
+      <ImageBackground source={require('../../assets/clouds1.jpg')} style={image}>
+      <View style={contain}>
+      <View style={container}>
         <Feather name="sun" size={100} color="blue" />
-       <Text style={styles.temp}>- 6 -</Text>
-       <Text style={styles.feels}>Feels like 5</Text>
-       <View style={styles.hlWrapper}>
-          <Text>High: 8 </Text>
-          <Text>Low: 6</Text>
-       </View>
+       <Text style={temp}>- 6 -</Text>
+       <Text style={feels}>Feels like 5</Text>
+       <RowTxt mes1={'High: 8 '} mes2={'Low: 6'} hlStyles={hlWrapper} hStyles={hl} lStyles={hl} />
       </View>
-      <View style={styles.bodyWrapper}>
-        <Text style={styles.des}>Its Sunny</Text>
-        <Text  style={styles.mes}>Its a perfect t-shirt wheather</Text>
+      <RowTxt mes1={'Its Sunny'} mes2={'Its a perfect t-shirt wheather'} hlStyles={bodyWrapper} hStyles={des} lStyles={mes} />
       </View>
       </ImageBackground>
     </SafeAreaView>
@@ -33,9 +33,13 @@ const styles = StyleSheet.create({
   image:{
     flex: 1
   },
+  contain: {
+    flex: 1,
+    backgroundColor: '#00000080'
+    },
   wrapper: {
-    backgroundColor: "royalblue",
-    paddingTop: StatusBar.currentHeight,
+    // backgroundColor: "royalblue",
+    // paddingTop: StatusBar.currentHeight,
     flex: 1
   },
   temp: {
@@ -48,7 +52,7 @@ const styles = StyleSheet.create({
   },
   hl: {
     fontSize: 20,
-    color: "black"
+    color: "white"
   },
   hlWrapper: {
     flexDirection: "row"
@@ -63,7 +67,8 @@ const styles = StyleSheet.create({
     fontSize: 48
   },
   mes: {
-    fontSize: 30
+    fontSize: 30,
+    color: 'white'
   }
 })
 

@@ -8,7 +8,7 @@ const Item = ({ dt_txt, min, max, condition}) =>{
 
         return(
             <View style={item}>
-                <Feather name={"sun"} size={50} color={'white'} />
+                <Feather name={"sun"} size={50} color={'blue'} />
                 <Text style={date}>{dt_txt}</Text>
                 <Text style={temp}>{min}</Text>
                 <Text style={temp}>{max}</Text>
@@ -31,11 +31,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'lightblue'
     },
     temp: { 
-        color: 'white',
+        color: 'black',
         fontSize: 20
     },
     date: {
-        color: 'white',
+        color: 'black',
         fontSize: 15
     }
 })
