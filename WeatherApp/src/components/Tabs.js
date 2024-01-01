@@ -11,17 +11,24 @@ const Tabs = () => {
     return(
         <Tab.Navigator screenOptions={{
         tabBarActiveTintColor: 'blue',
-        tabBarInactiveTintColor: 'gray',
-        tabBarStyle: { paddingBottom: 10, height: 65}
+        tabBarInactiveTintColor: 'royalblue',
+        tabBarStyle: { paddingBottom: 10, height: 65, backgroundColor: 'lightblue'},
+        headerStyle: { backgroundColor: 'lightblue'},
       }}>
           <Tab.Screen name={'Current'} component={CurrentWeather} options={{
-            tabBarIcon: ({focused}) =>(<Feather name={'droplet'} size={30} color={focused? 'blue':'black'} />)
+            tabBarIcon: ({focused}) =>(<Feather name={'droplet'} size={30} color={focused? 'blue':'royalblue'} />),
+            tabBarLabelStyle: { color: 'black'},
+            headerTitleStyle: { fontWeight: 'bold', fontSize: 25, color: 'blue', left: 160 }
           }} />
           <Tab.Screen name={'Upcoming'} component={UpcomingWeather} options={{
-            tabBarIcon: ({focused}) =>(<Feather name={'clock'} size={30} color={focused? 'blue':'black'} />)
+            tabBarIcon: ({focused}) =>(<Feather name={'clock'} size={30} color={focused? 'blue':'royalblue'} />),
+            tabBarLabelStyle: { color: 'black'},
+            headerTitleStyle: { fontWeight: 'bold', fontSize: 25, color: 'blue', left: 145 }
           }} />
           <Tab.Screen name={'City'} component={City} options={{
-            tabBarIcon: ({focused}) =>(<Feather name={'home'} size={30} color={focused? 'blue':'black'} />)
+            tabBarIcon: ({focused}) =>(<Feather name={'home'} size={30} color={focused? 'blue':'royalblue'} />),
+            tabBarLabelStyle: { color: 'black'},
+            headerTitleStyle: { fontWeight: 'bold', fontSize: 25, color: 'blue', left: 180 }
           }} />
       </Tab.Navigator>
     )
