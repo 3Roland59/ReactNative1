@@ -2,6 +2,7 @@ import React from "react"
 import { Feather } from '@expo/vector-icons'
 import { View, ImageBackground, Text, SafeAreaView, StyleSheet, StatusBar } from "react-native"
 import RowTxt from "../components/RowTxt"
+import { weatherType } from "../utilities/weatherType"
 
 const CurrentWeather = () =>{
 
@@ -17,7 +18,7 @@ const CurrentWeather = () =>{
        <Text style={feels}>Feels like 5</Text>
        <RowTxt mes1={'High: 8 '} mes2={'Low: 6'} hlStyles={hlWrapper} hStyles={hl} lStyles={hl} />
       </View>
-      <RowTxt mes1={'Its Sunny'} mes2={'Its a perfect t-shirt wheather'} hlStyles={bodyWrapper} hStyles={des} lStyles={mes} />
+      <RowTxt mes1={'Its Sunny'} mes2={weatherType.Thunderstorm.mes} hlStyles={bodyWrapper} hStyles={des} lStyles={mes} />
       </View>
       </ImageBackground>
     </SafeAreaView>
