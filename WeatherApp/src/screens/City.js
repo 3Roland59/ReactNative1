@@ -1,34 +1,38 @@
 import React from "react";
 import { SafeAreaView, ImageBackground, StatusBar, StyleSheet, View, Text } from "react-native";
 import Icontxt from "../components/Icontxt";
+import moment from 'moment'
 
-const City = () => {
+const City = ({ weatherData }) => {
 
-    const {pWrapper, rowLayout, rsTxt, rsWrapper, ptext, container, contain, image, city, country, place } = styles
+    console.log(weatherData)
+
+    const {pWrapper, rowLayout, rsTxt, rsWrapper, ptext, container, contain, image, city, Country, place } = styles
+    const { name, country, population, sunrise, sunset } = weatherData
 
     return(
         <SafeAreaView style={container}>
             <ImageBackground source={require('../../assets/city.jpg')} style={image}>
             <View style={contain}>
-                <Text style={[place, city]}>London</Text>
-                <Text style={[place, country]}>UK</Text>
+                <Text style={[place, city]}>{name}</Text>
+                <Text style={[place, Country]}>{country}</Text>
                 <View style={[rowLayout, pWrapper]}>
                     <Icontxt 
                         iname={'user'}
-                        icolor={'blue'} 
-                        bodyTxt={'9000'}
+                        icolor={'white'} 
+                        bodyTxt={`Population: ${population}`}
                         bodyTxtStyle={ptext} />
                 </View>
                 <View style={[rowLayout, rsWrapper]}>
                     <Icontxt 
                         iname={'sunrise'}
-                        icolor={'lightblue'} 
-                        bodyTxt={'10:30:00am'}
+                        icolor={'white'} 
+                        bodyTxt={moment(sunrise).format('h:mm:ss a')}
                         bodyTxtStyle={rsTxt} />
                     <Icontxt 
                         iname={'sunset'}
-                        icolor={'lightblue'} 
-                        bodyTxt={'18:00:00pm'}
+                        icolor={'white'} 
+                        bodyTxt={moment(sunset).format('h:mm:ss a')}
                         bodyTxtStyle={rsTxt} />
                 </View>
             </View>
@@ -55,13 +59,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'center',
         fontWeight: 'bold',
-        color: 'blue'
     },
     city: {
-        fontSize: 40
+        fontSize: 40,
+        color:'lightblue'
     },
-    country: {
-        fontSize: 30
+    Country: {
+        fontSize: 30,
+        color: 'white'
     },
     pWrapper: {
         justifyContent: 'center',

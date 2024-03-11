@@ -1,24 +1,28 @@
 import React from "react"
 import { Feather } from '@expo/vector-icons'
-import { View, ImageBackground, Text, SafeAreaView, StyleSheet, StatusBar } from "react-native"
+import { View, ImageBackground, Text, SafeAreaView, StyleSheet, StatusBar, Image } from "react-native"
 import RowTxt from "../components/RowTxt"
 import { weatherType } from "../utilities/weatherType"
 
-const CurrentWeather = () =>{
+const CurrentWeather = ({ weatherData }) =>{
 
-  const { wrapper, container, contain, image, hlWrapper, hl, bodyWrapper, des, mes, temp, feels } = styles
+  const { wrapper, container, contain, image, hlWrapper, hl, bodyWrapper, des, mes, tempStyles, feels } = styles
+
+  const { main: {temp, feels_like, temp_max, temp_min}, weather } = weatherData
+
+  const weatherCondition = weather[0]?.main
 
   return(
     <SafeAreaView style={wrapper}>
-      <ImageBackground source={require('../../assets/clouds1.jpg')} style={image}>
+      <ImageBackground source={weatherType[weatherCondition]?.url} style={image}>
       <View style={contain}>
       <View style={container}>
-        <Feather name="sun" size={100} color="blue" />
-       <Text style={temp}>- 6 -</Text>
-       <Text style={feels}>Feels like 5</Text>
-       <RowTxt mes1={'High: 8 '} mes2={'Low: 6'} hlStyles={hlWrapper} hStyles={hl} lStyles={hl} />
+        <Feather name={weatherType[weatherCondition]?.icon} size={100} color="blue" />
+       <Text style={tempStyles}>{temp}&deg;C</Text>
+       <Text style={feels}>{`Feels like ${feels_like}`}&deg;C</Text>
+       <RowTxt mes1={`High: ${temp_max} `} mes2={`Low: ${temp_min}`} hlStyles={hlWrapper} hStyles={hl} lStyles={hl} />
       </View>
-      <RowTxt mes1={'Its Sunny'} mes2={weatherType.Thunderstorm.mes} hlStyles={bodyWrapper} hStyles={des} lStyles={mes} />
+      <RowTxt mes1={weather[0]?.description} mes2={weatherType[weatherCondition]?.mes} hlStyles={bodyWrapper} hStyles={des} lStyles={mes} />
       </View>
       </ImageBackground>
     </SafeAreaView>
@@ -36,20 +40,20 @@ const styles = StyleSheet.create({
   },
   contain: {
     flex: 1,
-    backgroundColor: '#00000080'
+    // backgroundColor: '#00000080'
     },
   wrapper: {
     // backgroundColor: "royalblue",
     // paddingTop: StatusBar.currentHeight,
     flex: 1
   },
-  temp: {
+  tempStyles: {
     fontSize: 48,
-    color: "black"
+    color: "white"
   },
   feels: {
     fontSize: 30,
-    color: "black"
+    color: "blue"
   },
   hl: {
     fontSize: 20,
@@ -65,10 +69,11 @@ const styles = StyleSheet.create({
     marginBottom: 40
   },
   des: {
-    fontSize: 48
+    fontSize: 35,
+    color: 'blue'
   },
   mes: {
-    fontSize: 30,
+    fontSize: 25,
     color: 'white'
   }
 })

@@ -1,50 +1,13 @@
 import React from "react"
-import { SafeAreaView, ImageBackground, FlatList, StatusBar, StyleSheet, Text, View } from "react-native"
+import { SafeAreaView, ImageBackground, FlatList, StatusBar, StyleSheet } from "react-native"
 import { Feather } from '@expo/vector-icons'
 import Item from "../components/ListItem"
-
-    const DATA = [
-        {
-            dt_txt: '2023-02-12 12:00:00',
-            main: {
-                temp_max: 8.55,
-                temp_min: 7.55
-            },
-            weather: [
-                {
-                    main: 'Clear'
-                }
-            ]
-        },
-        {
-            dt_txt: '2023-02-12 15:00:00',
-            main: {
-                temp_max: 8.55,
-                temp_min: 7.55
-            },
-            weather: [
-                {
-                    main: 'Clouds'
-                }
-            ]
-        },
-        {
-            dt_txt: '2023-02-12 18:00:00',
-            main: {
-                temp_max: 8.55,
-                temp_min: 7.55
-            },
-            weather: [
-                {
-                    main: 'Rain'
-                }
-            ]
-        }
-    ]
-
+import { weatherType } from "../utilities/weatherType"
     
 
-const UpcomingWeather = () => {
+const UpcomingWeather = ({ weatherData }) => {
+
+    // console.log(weatherData)
 
     const renderItem = ({item}) => {
         return(
@@ -56,15 +19,13 @@ const UpcomingWeather = () => {
 
     return(
         <SafeAreaView style={container}>
-            <ImageBackground source={require('../../assets/clouds.jpg')} style={image}>
-                <View style={contain}>
+            <ImageBackground source={weatherType[weatherData[0].weather[0].main].url} style={image}>
             <FlatList
-                data={DATA}
+                data={weatherData}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.dt_txt}
                 // ItemSeparatorComponent={() => <View style={{backgroundColor: 'gray', height: 5}}></View>}
              />
-             </View>
              </ImageBackground>
         </SafeAreaView>
     )
@@ -76,13 +37,8 @@ const styles = StyleSheet.create({
         // paddingTop: StatusBar.currentHeight || 0,
         // backgroundColor: "royalblue"
     },
-  contain: {
-    flex: 1,
-    backgroundColor: '#00000080',
-    paddingTop: 10
-    },
-    image: {
-        flex: 1
+image: {
+    flex: 1
     }
 })
 export default UpcomingWeather
